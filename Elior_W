@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elior Oz - Software Engineer & Entrepreneur</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1e1e, #121212);
+            color: #f5f5f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            position: relative;
+        }
+
+        /* Loading Screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading video {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #00eaff;
+            text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            animation: assemble 3s forwards;
+        }
+
+        @keyframes assemble {
+            0% {
+                opacity: 0;
+                transform: translateZ(100px) rotateY(90deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateZ(50px) rotateY(45deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateZ(0) rotateY(0);
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00eaff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        nav a {
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #00eaff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom right;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .container {
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 100%;
+            background: rgba(25, 25, 25, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax {
+            background-image: url('https://images.pexels.com/photos/1181240/pexels-photo-1181240.jpeg'); /* Replace with your own image URL */
+            height: 500px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .parallax h2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #00eaff;
+            border-radius: 50%;
+            animation: particle 20s linear infinite;
+        }
+
+        @keyframes particle {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                transform: translateY(-2000px) translateX(300px) scale(0);
+            }
+        }
+
+        .highlight {
+            color: #00eaff;
+            text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        }
+
+        .slide-in {
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact {
+            background: rgba(25, 25, 25, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            margin: 2rem auto;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-top: 0;
+        }
+
+        .contact p {
+            margin: 0.5rem 0;
+        }
+
+        .contact a {
+            color: #00eaff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .dedication {
+            background: rgba(25, 25, 25, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            margin: 2rem auto;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .dedication h2 {
+            margin-top: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+
+            .parallax h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <video src="loading.mp4" autoplay muted loop></video>
+    </div>
+    <header>
+        <h1>Elior Oz</h1>
+    </header>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#dedication">Dedication</a>
+    </nav>
+    <div class="container">
+        <section id="about" class="slide-in visible">
+            <h2 class="highlight">About Me</h2>
+
+            <p>Hello! I'm Elior Oz, a passionate software engineer and entrepreneur. My journey in the tech world has been fueled by a deep fascination with computer science and a relentless drive to create innovative solutions. With years of experience in programming and project management, I am dedicated to exploring new technologies and pushing the boundaries of what’s possible.</p>
+
+                        <div class="contact">
+                <h2>Contact Information</h2>
+                <p>Phone: <a href="tel:+0527857452">052-7857452</a></p>
+                <p>Email: <a href="mailto:zdaci99@gmail.com">zdaci99@gmail.com</a></p>
+            </div>
+        </section>
+        <section id="experience" class="slide-in visible">
+            <h2 class="highlight">Experience</h2>
+            <p><strong>ShortBlock:</strong> I developed a versatile code management tool named ShortBlock, which features a unique programming language and specialized functionalities that I created entirely on my own. The tool is designed with dynamic functionality and a user-friendly interface to streamline code management. You can explore the project on <a href="https://github.com/bixolt/shortBlock" target="_blank">GitHub</a>.</p>
+        
+            <p><strong>Banda:</strong> As the CEO, I built the Banda website from scratch and contributed to its development process. Banda is a software library aimed at enhancing development practices. Check out the Banda project on <a href="https://github.com/bixolt/BANDA" target="_blank">GitHub</a>.</p>
+            
+            <p><strong>LinkedIn Programming School:</strong> I regularly post programming lessons and tips on artificial intelligence on my LinkedIn profile, offering valuable insights and guidance to the community. Visit my profile for more details: <a href="https://www.linkedin.com/in/banda-elior-440208208/" target="_blank">LinkedIn</a>.</p>
+            
+            <p><strong>Theories and Projects:</strong> I have developed numerous theories in areas such as neuroscience, object-oriented programming (OOP), and AI algorithms. My work includes various projects in the early stages, such as the Extora Partner Platform, Sports and Human Body Platform, Advanced Graph Algorithms in Python, and a sophisticated categorization system.</p>        </section>
+        <section id="skills" class="slide-in visible">
+            <h2 class="highlight">Skills</h2>
+            <ul>
+                <li>Advanced proficiency in programming languages: JavaScript, Python, Java, C++</li>
+                <li>Extensive experience with software development frameworks and tools</li>
+                <li>Deep understanding of data structures, algorithms, and system architecture</li>
+                <li>Proficiency in creating and managing dynamic and static data structures</li>
+                <li>Strong skills in project management and software lifecycle</li>
+                <li>Expertise in developing and managing open-source projects</li>
+            </ul>
+        </section>
+        <section id="projects" class="slide-in visible">
+            <h2 class="highlight">Projects</h2>
+            <ul>
+                <h3>Completed Projects</h3>
+                <ul>
+                    <li><strong>ShortBlock:</strong> A versatile code management tool with dynamic functionality and a user-friendly design, created entirely by myself.</li>
+                    <li><strong>LinkedIn Programming School:</strong> A comprehensive platform offering programming lessons and tips on artificial intelligence, available on my LinkedIn profile.</li>
+                </ul>
+                <h3>Ongoing Projects</h3>
+                <ul>
+                    <li><strong>Extora Partner Platform:</strong> A partner platform designed to enhance business processes and integrations.</li>
+                    <li><strong>Sports and Human Body Platform:</strong> A sophisticated platform focused on sports and human body analytics.</li>
+                    <li><strong>Advanced Graph Algorithms in Python:</strong> A project exploring complex graph algorithms implemented in Python.</li>
+                    <li><strong>Categorization System:</strong> A system under development for advanced categorization and management of data.</li>
+                </ul>
+            </ul>
+        </section>
+        <section id="dedication" class="slide-in visible dedication">
+            <h2 class="highlight">Why You Should Choose Me</h2>
+            <p>My extensive experience in programming and entrepreneurship has provided me with a deep understanding of technology and its potential. My work with various projects, including ShortBlock and Banda, showcases my ability to develop innovative solutions and manage complex software systems. My dedication to open source and continuous improvement reflects my commitment to making meaningful contributions to the field of computer science. Choosing me means bringing onboard a passionate, skilled, and proactive software engineer ready to tackle new challenges and drive your projects to success.</p>
+        </section>
+        <section class="dedication">
+            <h2 class="highlight">Dedication to the Client</h2>
+            <p>I thank you for the opportunity to introduce myself on this site. With deep experience in the computer field, I am excited to be a part of this progressive industry. I understood the intent to engage in the field, develop innovative solutions, and explore the limits of existing knowledge. Over my career, I have been able to lead significant projects and create unique contributions, and I aspire to continue influencing the industry with new insights and ideas. Thank you for believing in me and my skills.</p>
+        </section>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const options = {
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Hide the loading screen once the content is fully loaded
+            window.addEventListener('load', function() {
+                document.querySelector('.loading').style.display = 'none';
+            });
+        });
+
+        function createParticles() {
+            const container = document.createElement('div');
+            container.classList.add('particles');
+            document.body.appendChild(container);
+
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
